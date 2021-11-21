@@ -1,0 +1,16 @@
+{% extends "home.html" %}
+<html>
+    {% block content %}
+    <div class="container login">
+        <h1>Login</h1>
+        <form method="post">
+            <table>
+                {% csrf_token %}
+                {{ login_form.as_table }}
+                <input type="submit" values="Login"/>
+            </table>
+        </form>
+        <p class="signup-instead">Don't have an account? <a href="/signup">Sign Up</a> instead</p>
+    </div>
+    {% endblock %}
+</html>
