@@ -5,6 +5,10 @@
     </head>
     <body>
         <h1>Welcome to Img DB App</h1>
+        {% include 'navbar.html' %}
+        {% if user.is_authenticated %}
+        <h2>Welcome {{user.username}}</h2>
+        {% endif %}
     </body>
     {% block content %}
     {% endblock %}

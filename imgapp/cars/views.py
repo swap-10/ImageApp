@@ -2,7 +2,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import SignupForm
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 
 # Create your views here.
@@ -17,7 +17,7 @@ def signup_view(request):
             user = form.save()
             login(request, user)
             messages.success(request, "Successfully signed up")
-            return redirect("cars: home_view")
+            return redirect("home")
         messages.error(request, "Unsuccessful signup")
         print(form.errors)
         return HttpResponse(form.errors)
@@ -42,3 +42,9 @@ def login_view(request, *args, **kwargs):
             messages.error(request, "Invalid creds structure")
     form = AuthenticationForm()
     return render(request=request, template_name="login.html", context={"login_form":form})
+
+
+def logout_view(request, *args, **kwargs):
+    logout(request)
+    messages.info(request, "You have successfully logged out")
+    return redirect("home")

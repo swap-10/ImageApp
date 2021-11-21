@@ -23,5 +23,6 @@ urlpatterns = [
     path('home/', cars_views.home_view, name="homeexact"),
     path('signup/', cars_views.signup_view, name="signup"),
     path('login/', cars_views.login_view, name="login"),
+    path('logout/', cars_views.logout_view, name="logout"),
 
 ]
