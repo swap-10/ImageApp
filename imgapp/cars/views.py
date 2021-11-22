@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import SignupForm, EditInfoForm
 from django.contrib.auth import login, authenticate, logout
-from django.contrib import messages
+from django.urls import reverse
 
 # Create your views here.
 def home_view(request, *args, **kwargs):
@@ -20,11 +20,8 @@ def signup_view(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            messages.success(request, "Successfully signed up")
-            return redirect("home")
-        messages.error(request, "Unsuccessful signup")
-        print(form.errors)
-        return HttpResponse(form.errors)
+            return redirect(reverse("home"))
+        return render(request=request, template_name="signup.html", context={"signup_form":form})
     form = SignupForm()
     return render(request=request, template_name="signup.html", context={"signup_form":form})
 
@@ -38,34 +35,30 @@ def login_view(request, *args, **kwargs):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                messages.info(request, f"You are now logged in as {username}")
-                return redirect("home")
-            else:
-                messages.error(request, "Invalid creds")
+                return redirect(reverse("home"))
         else:
-            messages.error(request, "Invalid creds structure")
+            return render(request, "login.html", {"login_form":form})
     form = AuthenticationForm()
-    return render(request=request, template_name="login.html", context={"login_form":form})
+    return render(request, "login.html", {"login_form":form})
 
 
 def logout_view(request, *args, **kwargs):
     logout(request)
-    messages.info(request, "You have successfully logged out")
-    return redirect("home")
+    return redirect(reverse("home"))
 
 def edit_info(request):
     if (request.method == "POST"):
         form = EditInfoForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('/home/profile')
+            return redirect(reverse("profile"))
     else:
         if request.user.is_authenticated:
             form = EditInfoForm(instance=request.user)
             args = {'form':form}
             return render(request, "edit-registration.html", args)
         else:
-            return redirect("/login")
+            return redirect(reverse("login"))
 
 
 def change_password(request):
@@ -74,17 +67,17 @@ def change_password(request):
 
         if form.is_valid():
             form.save()
-            return redirect('/home/profile/change-password')
+            return redirect(reverse("change-password"))
     else:
         if request.user.is_authenticated:
             form = PasswordChangeForm(request.user)
             args = {'form':form}
             return render(request, "change-password.html", args)
         else:
-            return redirect('/login')
+            return redirect(reverse("login"))
 
 def profile_info(request, *args, **kwargs):
     if request.user.is_authenticated:
         return render(request, "profile.html")
     else:
-        return redirect("/login")
+        return redirect(reverse("login"))
