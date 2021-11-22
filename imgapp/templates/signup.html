@@ -3,13 +3,11 @@
     {% block content %}
     <div class="container">
         <h1>Register</h1>
-        <table>
-            <form method="POST">
-                {% csrf_token %}
-                {{ signup_form.as_table }}
-                <input type="submit" value="Sign Up"/>
-            </form>
-        </table>
+        <form method="POST">
+            {% csrf_token %}
+            {{ signup_form.as_p }}
+            <button type="submit">SignUp</button>
+        </form>
         <p class="login-if-acc">If you already have an account, <a href="/login">Login</a> instead</p>
     </div>
     {% endblock %}

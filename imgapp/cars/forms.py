@@ -1,25 +1,34 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import ReadOnlyPasswordHashField, ReadOnlyPasswordHashWidget, UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 
 class SignupForm(UserCreationForm):
     email = forms.EmailField(required=True)
-    dob = forms.DateField(widget=forms.SelectDateWidget(years=range(1960, 2022)))
-    fullname = forms.CharField(required=True)
-    location = forms.CharField(required=True)
-    mobile = forms.CharField(required=True)
+    first_name = forms.CharField(required=True)
+    last_name = forms.CharField(required=False)
     class Meta:
         model = User
-        fields = ("username", "email", "fullname", "location", "mobile", "dob", "password1", "password2")
+        fields = ("username", "email", "first_name", "last_name", "password1", "password2")
 
     def save(self, commit=True):
         user = super(SignupForm, self).save(commit=False)
         user.email = self.cleaned_data['email']
-        user.dob = self.cleaned_data['dob']
-        user.fullname = self.cleaned_data['fullname']
-        user.location = self.cleaned_data['location']
-        user.mobile = self.cleaned_data['mobile']
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
         if commit:
             user.save()
 
         return user
+
+
+class EditInfoForm(UserChangeForm):
+
+    password = ReadOnlyPasswordHashField(label=("Password"))
+    class Meta:
+        model = User
+        fields = {
+            "password",
+            "last_name",
+            "first_name",
+            "email"
+        }

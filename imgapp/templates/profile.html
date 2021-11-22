@@ -1,0 +1,38 @@
+{% extends "home.html" %}
+{% block content %}
+<h2>Profile info</h2>
+<div class="profile-info">
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">Your profile</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Username</td>
+                <td>{{ user.username }}</td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>{{ user.first_name}} {{user.last_name }}</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <td>Date joined</td>
+                <td>{{ user.date_joined }}</td>
+            </tr>
+            <tr>
+                <td>Last login</td>
+                <td>{{ user.last_login }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/home/profile/edit-info">Edit Info</a>
+    <br>
+    <a href="/home/profile/change-password">Change Password</a>
+</div>
+{% endblock %}
