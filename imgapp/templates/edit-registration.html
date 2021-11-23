@@ -1,0 +1,13 @@
+{% block content %}
+<h1>Edit Registration</h1>
+<br>
+<br>
+
+<div class='form-group'>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Update</button>
+    </form>
+</div>
+{% endblock %}

@@ -3,14 +3,26 @@
     {% block content %}
     <div class="container">
         <h1>Register</h1>
-        <table>
-            <form method="POST">
-                {% csrf_token %}
-                {{ signup_form.as_table }}
-                <input type="submit" value="Sign Up"/>
-            </form>
-        </table>
-        <p class="login-if-acc">If you already have an account, <a href="/login">Login</a> instead</p>
+        <form method="POST">
+            {% csrf_token %}
+            {{ signup_form.as_p }}
+            <button type="submit">SignUp</button>
+        </form>
+        <p class="login-if-acc">If you already have an account, <a href="{% url 'login' %}">Login</a> instead</p>
     </div>
+    {% if signup_form.errors %}
+        {% for field in signup_form %}
+            {% for error in field.errors %}
+                <div class="alert alert-danger">
+                    <strong>Error: {{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        {% for error in signup_form.non_field_errors %}
+            <div class="alert alert-danger">
+                <strong>Error: {{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endif %}
     {% endblock %}
 </html>
