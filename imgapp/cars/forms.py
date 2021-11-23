@@ -1,6 +1,10 @@
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField, ReadOnlyPasswordHashWidget, UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
+from django.db import models
+from django.forms.widgets import SelectDateWidget
+
+from .models import Profile
 
 class SignupForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -32,3 +36,11 @@ class EditInfoForm(UserChangeForm):
             "first_name",
             "email"
         }
+
+
+class EditProfile(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['dob', 'location', 'mobile', 'user_desc', 'interests']
+        widgets = {'dob': SelectDateWidget(years=range(1960, 2022))}
+    

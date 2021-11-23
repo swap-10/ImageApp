@@ -5,13 +5,15 @@ from django.contrib.auth.forms import (
 )
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import SignupForm, EditInfoForm
+from .forms import EditProfile, SignupForm, EditInfoForm
 from django.contrib.auth import login, authenticate, logout
 from django.urls import reverse
+from django.db import models
+from .models import Profile
 
 # Create your views here.
 def home_view(request, *args, **kwargs):
-    print(request.user)
+    print(request.user.pk)
     return render(request, "home.html")
 
 def signup_view(request):
@@ -81,3 +83,42 @@ def profile_info(request, *args, **kwargs):
         return render(request, "profile.html")
     else:
         return redirect(reverse("login"))
+
+def edit_profile(request, *args, **kwargs):
+    if request.user.is_authenticated:
+        if (request.method == "POST"):
+
+            if Profile.objects.filter(pk=request.user.pk).exists():
+                instance = Profile.objects.get(pk=request.user.pk)
+                form = EditProfile(request.POST, instance=instance)
+                form.fields['dob'].disabled = True
+                if form.is_valid():
+                    form.save()
+                    return redirect(reverse("profile"))
+                else:
+                    form.fields['dob'].disabled = True
+                    return render(request, "edit-profile.html", {"form":form})
+                
+            else:
+                form = EditProfile(request.POST)
+                if form.is_valid():
+                    profile = form.save(commit=False)
+                    profile.user = request.user
+                    profile.save()
+                    return redirect(reverse("profile"))
+                else:
+                    return render(request, "edit-profile.html", {"form":form})
+        
+        else:
+            if Profile.objects.filter(pk=request.user.pk).exists():
+                instance = Profile.objects.get(pk=request.user.pk)
+                form = EditProfile(instance=instance)
+                form.fields['dob'].disabled = True
+                args = {'form':form}
+                return render(request, "edit-profile.html", args)
+            else:
+                form = EditProfile()
+                args = {'form':form}
+                return render(request, "edit-profile.html", args)
+    else:
+        return redirect(reverse("login"))    
