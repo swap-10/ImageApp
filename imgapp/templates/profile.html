@@ -2,8 +2,8 @@
 {% block content %}
 <h2>Profile info</h2>
 <div class="profile-info">
-    <table>
-        <thead>
+    <table style="border: 2px black solid; background-color: rgb(208, 202, 226); border-radius: 5px; margin: 3px; padding: 5px;">
+        <thead style="border: 2px black solid;">
             <tr>
                 <th colspan="2">Your profile</th>
             </tr>
@@ -20,6 +20,26 @@
             <tr>
                 <td>Email</td>
                 <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <td>DOB </td>
+                <td>{{ user.profile.dob }}</td>
+            </tr>
+            <tr>
+                <td>Location </td>
+                <td>{{ user.profile.location }}</td>
+            </tr>
+            <tr>
+                <td>Mobile </td>
+                <td>{{ user.profile.mobile }}</td>
+            </tr>
+            <tr>
+                <td>Bio </td>
+                <td>{{ user.profile.user_desc }}</td>
+            </tr>
+            <tr>
+                <td>Interests </td>
+                <td>{{ user.profile.interests }}</td>
             </tr>
             <tr>
                 <td>Date joined</td>
