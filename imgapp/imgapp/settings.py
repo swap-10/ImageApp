@@ -41,8 +41,10 @@ INSTALLED_APPS = [
 
     # OWN
     'cars',
+    'imgs',
 
     # THIRD PARTY
+    'cloudinary'
 ]
 
 MIDDLEWARE = [
