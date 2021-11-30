@@ -1,0 +1,19 @@
+{% load cloudinary %}
+
+{% block content %}
+<h1>{{ friendname }}'s Images</h1>
+<h2><a href="{% url 'home' %}">Home</a></h2>
+<div class="photos" style="overflow: visible; white-space: nowrap;">
+    {% if not photos.exists %}
+    <h2>No photos uploaded yet</h2>
+    {% endif %}
+    {% for photo in photos %}
+        <div class="photo" style="display: inline-block;">
+            <a href="{{ photo.image.url }}" target="_blank" class="public_id_link">
+                <div class="public_id">{{ photo.title }}</div>
+                {% cloudinary photo.image formatting %}
+            </a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
