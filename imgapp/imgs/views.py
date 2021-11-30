@@ -9,7 +9,6 @@ from .forms import PhotoForm
 def upload(request):
     context = {'form': PhotoForm()}
     if (request.method == 'POST'):
-        # instance = Profile.objects.get(pk=request.user.pk)
         form = PhotoForm(request.POST, request.FILES)
         context['posted'] = form.instance
         if form.is_valid():
@@ -26,3 +25,13 @@ def images(request):
         return render(request, 'images.html', context)
     else:
         return redirect(reverse('login'))
+
+def delete(request, id):
+    item = Photo.objects.get(pk=id)
+    print(id)
+    if request.user.pk == item.owner_id:
+        print(id)
+        Photo.objects.filter(id=id).delete()
+        return redirect(reverse('images'))
+    else:
+        return redirect(reverse('home'))
