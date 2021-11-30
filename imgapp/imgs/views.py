@@ -9,7 +9,6 @@ from .forms import PhotoForm
 def upload(request):
     context = {'form': PhotoForm()}
     if (request.method == 'POST'):
-        # instance = Profile.objects.get(pk=request.user.pk)
         form = PhotoForm(request.POST, request.FILES)
         context['posted'] = form.instance
         if form.is_valid():
