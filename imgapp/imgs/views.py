@@ -1,9 +1,12 @@
 from django.shortcuts import redirect, render
 from cloudinary.forms import cl_init_js_callbacks
+import cloudinary
 from django.urls import reverse
 from .models import Photo
 from cars import models as cmodels
 from .forms import PhotoForm
+from django.db.models.signals import post_delete
+from django.dispatch.dispatcher import receiver
 # Create your views here.
 
 def upload(request):
@@ -31,6 +34,7 @@ def delete(request, id):
     print(id)
     if request.user.pk == item.owner_id:
         print(id)
+        cloudinary.uploader.destroy(item.image.public_id, invalidate=True)
         Photo.objects.filter(id=id).delete()
         return redirect(reverse('images'))
     else:
