@@ -26,3 +26,13 @@ def images(request):
         return render(request, 'images.html', context)
     else:
         return redirect(reverse('login'))
+
+def delete(request, id):
+    item = Photo.objects.get(pk=id)
+    print(id)
+    if request.user.pk == item.owner_id:
+        print(id)
+        Photo.objects.filter(id=id).delete()
+        return redirect(reverse('images'))
+    else:
+        return redirect(reverse('home'))

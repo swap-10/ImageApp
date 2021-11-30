@@ -4,8 +4,9 @@
 <div class="backend-upload">
     <form action="{% url 'upload' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form }}
+        {{ form.as_p }}
         <input type="submit" value="Upload">
     </form>
 </div>
+<h2><a href="{% url 'images' %}">My Images</a></h2>
 {% endblock %}

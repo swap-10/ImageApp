@@ -4,6 +4,7 @@ from django.urls.resolvers import URLPattern
 from . import views
 
 urlpatterns = [
+    path('', views.images, name='images'),
     path('upload/', views.upload, name="upload"),
-    path('images', views.images, name='images'),
+    path('<int:id>/delete', views.delete),
 ]
