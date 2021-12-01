@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     # OWN
     'cars',
     'imgs',
+    'friends',
 
     # THIRD PARTY
     'cloudinary'

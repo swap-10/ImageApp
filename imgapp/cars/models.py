@@ -64,14 +64,7 @@ class Albums(models.Model):
         db_table = 'albums'
 
 
-class Friends(models.Model):
-    rel_id = models.CharField(primary_key=True, max_length=64)
-    origin = models.ForeignKey('Users', models.DO_NOTHING, related_name='friend_origin')
-    friend = models.ForeignKey('Users', models.DO_NOTHING, related_name='friend_frienddeets')
 
-    class Meta:
-        managed = False
-        db_table = 'friends'
 
 
 class Gallery(models.Model):

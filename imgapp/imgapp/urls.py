@@ -24,5 +24,6 @@ urlpatterns = [
     path('home/', cars_views.home_view, name="homeexact"),
     path('account/', include('cars.urls')),
     path('images/', include('imgs.urls')),
+    path('friends/', include('friends.urls')),
 
 ]
