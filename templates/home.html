@@ -1,10 +1,13 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
     <head>
         <title>Img DB App</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'css/stylesheet.css' %}">
     </head>
     <body>
-        <h1>Welcome to Img DB App</h1>
+        <h1>Picxsea</h1>
         {% include 'navbar.html' %}
         {% if user.is_authenticated %}
         <h2>Welcome {{user.username}}</h2>

@@ -1,7 +1,7 @@
-<nav class="main-navbar">
-    <div class="collapse navbar-collapse" id="navbarcollapse">
+<nav>
+<div class="main-navbar">
         <ul>
-            <li>
+            <li class="active">
                 <a href="{% url 'home' %}">Home</a>
             </li>
             {% if user.is_authenticated %}
@@ -28,5 +28,5 @@
 
             {% endif %}
         </ul>
-    </div> 
+</div>
 </nav>

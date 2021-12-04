@@ -1,12 +1,18 @@
+{% extends 'home.html' %}
+
 {%load cloudinary %}
 
 {% block content %}
-<div class="backend-upload">
+<div class="backend-upload" style="margin: 10px">
     <form action="{% url 'upload' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Upload">
     </form>
 </div>
-<h2><a href="{% url 'images' %}">My Images</a></h2>
+<a href="{% url 'images' %}">
+<div class="back-to-my-images">
+    <h2>My Images</h2>
+</div>
+</a>
 {% endblock %}

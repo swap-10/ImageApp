@@ -1,9 +1,13 @@
+{% extends "home.html" %}
 {% load cloudinary %}
 
 {% block content %}
-<h1>Your Images</h1>
-<h2><a href="{% url 'home' %}">Home</a></h2>
-<h2><a href="{% url 'upload' %}">Upload Image</a></h2>
+<h2>Your Images</h2>
+<a href="{% url 'upload' %}">
+<div class="upload-button">
+<h2>Upload Image</h2>
+</div>
+</a>
 <div class="photos" style="overflow: visible; white-space: nowrap;">
     {% if not photos.exists %}
     <h2>No photos uploaded yet</h2>

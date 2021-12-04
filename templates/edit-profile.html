@@ -1,9 +1,10 @@
+{% extends "home.html" %}
 {% block content %}
 <h1>Edit Profile</h1>
 <br>
 <br>
 
-<div class='form-group'>
+<div class='form-group'  style="margin: 15px">
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
