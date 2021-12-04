@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
 from cars import views as cars_views
+from django.conf import settings
+from django.conf.urls.static import static
 import cars
 
 urlpatterns = [
@@ -26,4 +29,4 @@ urlpatterns = [
     path('images/', include('imgs.urls')),
     path('friends/', include('friends.urls')),
 
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
