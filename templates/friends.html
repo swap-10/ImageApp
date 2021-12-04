@@ -1,7 +1,6 @@
+{% extends "home.html" %}
 {% block content %}
-<a href="{% url 'home' %}">Home</a>
 <h1>Friends</h1>
-<h2>Logged in as {{ user.username }}</h2>
 <h2>Friend list</h2>
 {% for friend in friendlist %}
     <a href="{{ friend.friend_id }}/images">{{ friend.friend_id }}</a>
