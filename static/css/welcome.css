@@ -1,0 +1,30 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    height: 800px;
+    width: 100%;
+    margin-top: 0px;
+    padding-top: 0px;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+    background: #C04848;  /* fallback for old browsers */
+    background: linear-gradient(rgb(72,0,72,0.8), rgb(192,72,72,0.8)), url("../images/welcomepage.jpg"); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+.Login, .SignUp {
+    margin: 30px;
+    margin-top: 300px;
+    margin-right: 250px;
+    margin-left: 250px;
+    padding: 10px;
+    height: 70px;
+    width: 150px;
+    border-radius: 10px;
+}

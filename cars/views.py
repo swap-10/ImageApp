@@ -14,7 +14,10 @@ from .models import Profile
 # Create your views here.
 def home_view(request, *args, **kwargs):
     print(request.user.pk)
-    return render(request, "home.html")
+    if request.user.is_authenticated:
+        return render(request, "home.html")
+    else:
+        return render(request, "welcome.html")
 
 def signup_view(request):
     if request.method == "POST":

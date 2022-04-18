@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <title>Pixsea</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'css/welcome.css' %}">
+    </head>
+    <body>
+        <header>
+            <h1>Pixsea</h1>
+            <h2>Welcome to Pixsea</h2>
+            <section>
+                <div>
+                    <a href="{% url 'login' %}">
+                        <button class="Login" type="button">
+                            Login  
+                        </button>
+                    </a>
+                    <a href="{% url 'signup' %}">
+                        <button class="SignUp" type=""button">
+                            SignUp
+                        </button>
+                    </a>
+                </div>
+            </section>
+        </header>
+    </body>
+    {% block content %}
+    {% endblock %}
+</html>
